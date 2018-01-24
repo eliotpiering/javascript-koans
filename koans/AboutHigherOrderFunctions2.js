@@ -1,25 +1,25 @@
 describe("About Higher Order Functions pt 2", function () {
 
-  it("should use filter to select only array elements that meet a criteria", function () {
+  it("should use filter to select array elements that meet a criteria", function () {
     // return a filer people over 40
     var people = [{name: "name", age: 41}, {name: "name", age: 22},{name: "name", age: 47},{name: "name", age: 35}];
-    var peopleOverFourty = people.filter(function (x) { return x.age > 40 });
+    var peopleOverFourty = people.filter(function (x) {/* FILL ME IN */});
 
     expect(peopleOverFourty).toEqual([{name: "name", age: 41}, {name: "name", age: 47}]);
   });
 
-  it("should use 'map' to transform every element in an array", function () {
+  it("should use map to transform elements in an array into a new array", function () {
     // return a list of everyone's name
     var people = [{name: "name", age: 41}, {name: "name", age: 22},{name: "name", age: 47}];
-    var names = people.map(function(x) { return x.age });
+    var names = people.map(function(x) { /* FILL ME IN */});
 
     expect(names).toEqual([41, 22, 47]);
   });
 
-  it("should use 'reduce' to transform elements in into a new value", function () {
+  it("should use 'reduce' to combine elements in an array into a new value", function () {
     // sum these numbers
     var numbers = [1, 2, 3];
-    var reduction = numbers.reduce(function(acc, n) { return acc + n }, 0);
+    var reduction = numbers.reduce(function(acc, n) { /* FILL ME IN */}, 0);
 
     expect(reduction).toBe(6);
   });
@@ -31,76 +31,68 @@ describe("About Higher Order Functions pt 2", function () {
       {name: "Aundrea", dancing: 8, performing: 5}, {name: "Aubrey", dancing: 8, performing: 6, otherObligations: ''},  {name: "Robert", dancing: 7, performing: 9} ];
 
     // filter out band members who have dancing skill 3 or less
-    var afterRoundOne = bandMembers.filter( m => m.dancing > 3);
+    var afterRoundOne = bandMembers.filter( /* FILL ME IN */ );
     expect(afterRoundOne.length).toEqual(8);
 
-    // Remove band members who have otherObligations (only filter members who have the 'otherObligations' property and have some value in that property )
-    var afterRoundTwo = afterRoundOne.filter( m => !m.otherObligations || !m.otherObligations.length > 0 );
+    // Remove band members who have otherObligations (only filter members who have the 'otherObligations' property AND have some value in that property, not an empty string)
+    var afterRoundTwo = afterRoundOne.filter( /* FILL ME IN */ );
     expect(afterRoundTwo.length).toEqual(6);
   });
 
   it("should make the band 2", function() {
     var bandMembers = [{name: "Brian", dancing: 6, performing: 5, otherObligations: null}, {name: "Kristen" ,dancing: 7, performing: 4},  {name: "Bethany", dancing: 6, performing: 5},
                        {name: "Aundrea", dancing: 8, performing: 5, otherObligations: "Something"}, {name: "Aubrey", dancing: 8, performing: 6, otherObligations: ''},  {name: "Robert", dancing: 7, performing: 9}];
-    // Transform the list of members left afterRoundTwo into a list of names and their strength
-    // for example "Brian: dancr" or "Aubrey: performer"
-    var names = bandMembers.map( m => `${m.name}: ${m.dancing > m.performing ? "dancer" : "performer"}`);
 
-    expect(names).toEqual(["Brian: dancer", "Kristen: dancer", "Bethany: dancer", "Aundrea: dancer", "Aubrey: dancer", "Robert: performer"]);
-    expect(names.length).toEqual(6);
-
-    // Transform into a list of the length of each name
-    var nameLengths = bandMembers.map( m => m.name.length );
+    // Transform bandMembers into list containing the length of each band member's name
+    var nameLengths = bandMembers.map( /* FILL ME IN */ );
     expect(nameLengths.length).toEqual(6);
     expect(nameLengths).toEqual([5, 7, 7, 7, 6, 6]);
 
+    // Transform bandMembers into a list of names and each members strength
+    // for example "Brian: dancer" or "Aubrey: performer"
+    var names = bandMembers.map( /* FILL ME IN */ );
+    expect(names).toEqual(["Brian: dancer", "Kristen: dancer", "Bethany: dancer", "Aundrea: dancer", "Aubrey: dancer", "Robert: performer"]);
+    expect(names.length).toEqual(6);
+
     // Map over all of the band members and return a html string that contains each person's names, dancing skill, performing skill
-    // For example the first element should be a string equal to this: "<div>Name: Donnie <br> Dancing: 3 <br> Performing: 5 </div>"
-    var profiles = bandMembers.map( (m) => {
-      var html = `<div>Name: ${m.name} <br> Dancing: ${m.dancing} <br> Performing: ${m.performing}`;
-      if (m.otherObligations && m.otherObligations.length > 0) {
-        html += "Other Obligations: " + m.otherObligations + "</div>";
-      } else {
-        html += "</div>";
-      }
-      return html;
-    });
+    // The first element should be a string equal to this: "<div>Name: Donnie <br> Dancing: 3 <br> Performing: 5 </div>"
+    var profiles = bandMembers.map( /* FILL ME IN */);
     expect(profiles.length).toEqual(6);
     expect(profiles[0]).toEqual(`<div>Name: ${bandMembers[0].name} <br> Dancing: ${bandMembers[0].dancing} <br> Performing: ${bandMembers[0].performing}</div>`);
   });
 
   it("should make the band 3", function() {
-    //REDUCE
     var bandMembers = [{name: "Brian", dancing: 6, performing: 5, otherObligations: null}, {name: "Kristen" ,dancing: 7, performing: 4},  {name: "Bethany", dancing: 6, performing: 5},
                        {name: "Aundrea", dancing: 8, performing: 5, otherObligations: "Something"}, {name: "Aubrey", dancing: 8, performing: 6, otherObligations: ''},  {name: "Robert", dancing: 7, performing: 9}];
 
-    
     // reduce bandMembers to get the sum of all dancing properties
-    var totalDancingSkillLeft = bandMembers.reduce( (acc, m)  => acc + m.dancing, 0);
+    var totalDancingSkillLeft = bandMembers.reduce( /* FILL ME IN */ );
     expect(totalDancingSkillLeft).toEqual(42);
 
     // reduce bandMembers to get the sum of all performing properties
-    var totalPerformingSkillLeft = bandMembers.reduce( (acc, m)  => acc + m.performing, 0);
+    var totalPerformingSkillLeft = bandMembers.reduce( /* FILL ME IN */);
     expect(totalPerformingSkillLeft).toEqual(34);
 
-    // // keep members who have higher than average scores
-    // // sum dancing + (performing*2) / length of the list to get average
-    // var afterRoundThree = bandMembers.filter(function(m) {
-    //   return (m.performing + m.dancing) > (totalDancingSkillLeft/6 + totalPerformingSkillLeft/6);
-    // });
-    // expect(afterRoundThree.length).toEqual(3);
-    // expect(afterRoundThree).toEqual([{name: "Aundrea", dancing: 8, performing: 5, otherObligations: 'Something'}, {name: "Aubrey", dancing: 8, performing: 6, otherObligations: ''},  {name: "Robert", dancing: 7, performing: 9}]);
-
-    // What was the highest performer and highest dancer score
-    // use reduce to create an object with two properties 'maxPerform' and 'maxScore'
+    // What was the highest performer and highest dancer score?
+    // use reduce to create an object with two properties 'maxPerform' and 'maxDance'
+    // 'maxPerform' should contain the highest perform score and 'maxDance' the highest dance score out of all the members
+    // Hint: the initial value passed to reduce will be an object
     var bestPerformAndDance = bandMembers.reduce( (best, m) => {
-      var newPerform = m.performing < best.maxPerform ? best.maxPerform : m.performing;
-      best.maxPerform = newPerform;
-      var newDance = m.dancing < best.maxDance ? best.maxDance : m.dancing;
-      best.maxDance = newDance;
-      return best;
-    },{});
+      /* FILL ME IN */
+    },{maxPerform: 0, maxDance: 0});
     expect(bestPerformAndDance).toEqual({maxPerform: 9, maxDance: 8});
+  });
+
+  it("should write a function that turns an array of numbers into an array with just two numbers. The first will be the count of all the negative numbers, the second the sum of all positive numbers", function(){
+    //For Example: countOfPositveAndSumOfNegatives([-1,-2,3,4]) === [2,7]
+    //There are two negative numbres and 3+4 =7 
+
+    var countOfPositveAndSumOfNegatives = function(arr) {
+      return "FILL ME IN";
+    };
+
+    var numbers = [-1,-2,-3,-4,0,3,5,2,5];
+    expect(countOfPositveAndSumOfNegatives(numbers)).toEqual([4, 15]);
   });
 
   it("should write a function that finds the difference between two arrays", function () {
@@ -109,27 +101,12 @@ describe("About Higher Order Functions pt 2", function () {
     // arrayDiff([1,2],[1]) == [2]
     // arrayDiff([1,2,2,2,3],[2]) == [1,3]
 
-    var arrayDiff = function(a1, a2) {
-      return a1.filter(function(a) {
-        return !a2.includes(a)
-      });
+    var arrayDiff = function(array1, array2) {
+      return "FILL ME IN";
     };
 
     expect(arrayDiff([1,2,3], [1,2])).toEqual([3]);
     expect(arrayDiff([1,2,2,2,3], [2])).toEqual([1,3]);
-  });
-
-  it("should write a function that turns an array of numbers into an array with two numbers the first is the count of all the negative numbers, the second the sum of all negative numbers", function(){
-    //countOfPositveAndSumOfNegatives([-1,-2,3,4]) === [2,7]
-
-    var countOfPositveAndSumOfNegatives = function(arr) {
-      var negatives = arr.filter((a) =>{return a > 0 });
-      var positives = arr.filter((a) =>{return a < 0 });
-      return[positives.length, negatives.reduce((acc, i)=> acc + i, 0)];
-    };
-
-    var numbers = [-1,-2,-3,-4,0,3,5,2,5];
-    expect(countOfPositveAndSumOfNegatives(numbers)).toEqual([4, 15]);
   });
 
   it("should write a function to capitalize every word in a string", function(){
@@ -147,9 +124,7 @@ describe("About Higher Order Functions pt 2", function () {
     // turn the array back into a string
 
     var jadenCase = function(string){
-      var words = string.split(" ");
-      var caps = words.map((w) => w[0].toUpperCase() + w.slice(1) );
-      return caps.join(" ");
+      return "FILL ME IN";
     };
 
     expect(jadenCase("How can mirrors be real if our eyes aren't real")).toEqual("How Can Mirrors Be Real If Our Eyes Aren't Real");
@@ -158,15 +133,12 @@ describe("About Higher Order Functions pt 2", function () {
   it("should use reduce to sum all odd numbers in an array", function(){
     var numbers = [1,2,3,4,5,6,7,8,9];
     var sumOfOdds = numbers.reduce(function(acc, n){
-      if(n % 2 !== 0) {
-        return acc + n;
-      } else {
-        return acc;
-      }
+      /* FILL ME IN */
     }, 0);
     expect(sumOfOdds).toEqual(1+3+5+7+9);
   });
 
+  // These last 5 questions are for extra fun but not part of the required assignment
   it("use reduce to convert a binary representation of a number (array of 0s and 1s) into that number in base 10", function() {
     // Given an array of one's and zero's convert the equivalent binary value to an integer.
     // Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1
@@ -182,11 +154,7 @@ describe("About Higher Order Functions pt 2", function () {
     // hint: the callback for reduce will have an optional argument for the index of the current item
 
     var binaryToNumber = function(array) {
-      var reversed = array.reverse();
-      return reversed.reduce(function(acc, i, index){
-        var val = 2**index;
-        return i === 1 ? acc + val : acc;
-      }, 0);
+      /* FILL ME IN */
     };
 
     expect(binaryToNumber([0,0,1])).toEqual(1);
@@ -197,16 +165,10 @@ describe("About Higher Order Functions pt 2", function () {
     expect(binaryToNumber([1,0,1,1])).toEqual(11);
   });
   
-  // Uncomment for extra challenge!!!
   it("can write your own filter function", function() {
     var myFilter = function(arr, func){
-      var newArr = [];
-      arr.forEach( (i) => {
-        if(func(i)) {
-          newArr.push(i);
-        }
-      });
-      return newArr;
+      /* FILL ME IN */
+      return arr;
     };
 
     expect(myFilter([1,2,3], (i) => i > 2)).toEqual([3]);
@@ -214,9 +176,8 @@ describe("About Higher Order Functions pt 2", function () {
   
   it("can write your own map function", function() {
     var myMap = function(arr, func){
-      var newArr = [];
-      arr.forEach( (i) => {newArr.push(func(i));});
-      return newArr;
+      /* FILL ME IN */
+      return arr;
     };
 
     expect(myMap([1,2,3], (i) => i + 2)).toEqual([3,4,5]);
@@ -224,11 +185,8 @@ describe("About Higher Order Functions pt 2", function () {
 
   it("can write your own reduce function", function() {
     var myReduce = function(arr, func, initial){
-      var acc = initial;
-      arr.forEach( (i) => {
-        acc = func(acc, i);
-      });
-      return acc;
+      /* FILL ME IN */
+      return arr;
     };
 
     expect(myReduce([1,2,3], ((acc, i) => acc + i), 0)).toEqual(6);
@@ -236,9 +194,10 @@ describe("About Higher Order Functions pt 2", function () {
 
 });
 
-// For Fun, add your own thing
-it("should use add some html to the page", function () {
+it("can add some html to the page", function () {
+  /* create your own list of names and images it will be turned into html and displayed at the bottom of the page!*/
   var animals = [{name: "animal", img: "http://lorempixel.com/400/200/animals/" }, {name: "animal", img: "http://lorempixel.com/400/200/animals/"}];
+
   var html = animals.map(function(p){
     html = `<li>${p.name}<img src="${p.img}" height="200" width="400"></img></li>`;
     console.log(html);
@@ -253,4 +212,3 @@ it("should use add some html to the page", function () {
   });
   document.body.getElementsByClassName("banner")[0].append( outerList);
 });
-
